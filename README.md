@@ -24,8 +24,7 @@ The data includes:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/23f3004008/TDS-Project1-Data.git
-   cd TDS-Project1-Data
+   git clone https://github.com/tanushrisiitm/TDS-project1.git
    ```
 
 2. **Install Dependencies**
