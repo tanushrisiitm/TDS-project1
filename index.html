@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TDS Virtual TA</title>
+</head>
+<body>
+  <h2>Ask a Question</h2>
+  <input type="text" id="question" placeholder="Enter your question" size="60">
+  <button onclick="askQuestion()">Submit</button>
+  <pre id="response" style="white-space: pre-wrap; margin-top: 20px;"></pre>
+
+  <script>
+    async function askQuestion() {
+      const question = document.getElementById("question").value;
+      const responseDiv = document.getElementById("response");
+      responseDiv.innerText = "Waiting for answer...";
+
+      const res = await fetch("/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: question })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        responseDiv.innerText = "Answer:\n" + data.answer;
+      } else {
+        responseDiv.innerText = "Error: " + res.status;
+      }
+    }
+  </script>
+</body>
+</html>
