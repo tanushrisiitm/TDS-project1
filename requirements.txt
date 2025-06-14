@@ -11,3 +11,4 @@ tqdm
 markdown
 python-multipart
 setuptools
+jinja2
