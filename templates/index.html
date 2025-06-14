@@ -12,6 +12,8 @@
   <pre id="response" style="white-space: pre-wrap; margin-top: 20px;"></pre>
 
   <script>
+    const API_URL = "https://tds-project1-31mu.onrender.com/api";
+
     async function askQuestion() {
       const question = document.getElementById("question").value;
       const responseDiv = document.getElementById("response");
@@ -24,7 +26,7 @@
       responseDiv.innerText = "⏳ Waiting for answer...";
 
       try {
-        const res = await fetch("/api", {
+        const res = await fetch(API_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ question: question })
@@ -34,7 +36,6 @@
           const data = await res.json();
           responseDiv.innerText = "✅ Answer:\n\n" + data.answer;
 
-          // Show links if available
           if (data.links && data.links.length > 0) {
             responseDiv.innerText += "\n\n🔗 Links:\n";
             data.links.forEach(link => {
@@ -42,7 +43,8 @@
             });
           }
         } else {
-          responseDiv.innerText = `❌ Error ${res.status}: ${res.statusText}`;
+          const errorText = await res.text();
+          responseDiv.innerText = `❌ Error ${res.status}: ${errorText}`;
         }
       } catch (err) {
         responseDiv.innerText = "❌ Failed to fetch answer. Check your internet or server logs.";
