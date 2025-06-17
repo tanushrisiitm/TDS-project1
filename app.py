@@ -624,7 +624,7 @@ async def query_knowledge_base(
             error_msg = "API_KEY environment variable not set"
             logger.error(error_msg)
             return {
-                "answer": "Sorry, I couldn't process your request due to an internal error.",
+                "answer": "Sorry, I couldn't process your request as api key is not set",
                 "links": []
             }
 
