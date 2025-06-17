@@ -699,7 +699,7 @@ async def query_knowledge_base(
             logger.error(error_msg)
             logger.error(traceback.format_exc())
             return {
-                "answer": "Sorry, I couldn't process your request due to an internal error.",
+                "answer": f"Internal Error: {e}",
                 "links": []
             }
         finally:
@@ -710,7 +710,7 @@ async def query_knowledge_base(
         logger.error(error_msg)
         logger.error(traceback.format_exc())
         return {
-            "answer": "Sorry, I couldn't process your request due to an internal error.",
+            "answer": f"Internal Error: {e}",
             "links": []
         }
 @app.post("/query")
