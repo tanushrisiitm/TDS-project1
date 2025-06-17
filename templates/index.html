@@ -6,7 +6,11 @@
 <body>
   <h2>Ask a Question</h2>
 
-  <input type="text" id="question" placeholder="Enter your question" size="60">
+  <input type="text" id="question" placeholder="Enter your question" size="60"><br><br>
+
+  <label for="image">Upload an image (optional):</label>
+  <input type="file" id="image" accept="image/*"><br><br>
+
   <button onclick="askQuestion()">Submit</button>
 
   <pre id="response" style="white-space: pre-wrap; margin-top: 20px;"></pre>
@@ -16,6 +20,7 @@
 
     async function askQuestion() {
       const question = document.getElementById("question").value;
+      const imageInput = document.getElementById("image");
       const responseDiv = document.getElementById("response");
 
       if (!question.trim()) {
@@ -25,11 +30,22 @@
 
       responseDiv.innerText = "⏳ Waiting for answer...";
 
+      let imageBase64 = null;
+
+      // If an image is selected, read and encode it
+      if (imageInput.files.length > 0) {
+        const file = imageInput.files[0];
+        imageBase64 = await toBase64(file);
+      }
+
       try {
         const res = await fetch(API_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ question: question })
+          body: JSON.stringify({
+            question: question,
+            image: imageBase64 // null if no image
+          })
         });
 
         if (res.ok) {
@@ -50,6 +66,15 @@
         responseDiv.innerText = "❌ Failed to fetch answer. Check your internet or server logs.";
         console.error(err);
       }
+    }
+
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.split(',')[1]); // Get base64 only
+        reader.onerror = error => reject(error);
+      });
     }
   </script>
 </body>
