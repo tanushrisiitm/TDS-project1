@@ -708,7 +708,7 @@ async def query_knowledge_base(
             "answer": "Sorry, I couldn't process your request due to an internal error.",
             "links": []
         }
- @app.post("/query")
+@app.post("/query")
  async def query_knowledge_base(request: QueryRequest):
      try:
          # Log the incoming request
