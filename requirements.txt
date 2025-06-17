@@ -12,3 +12,4 @@ markdown
 python-multipart
 setuptools
 jinja2
+openai
