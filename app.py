@@ -117,8 +117,6 @@ if not os.path.exists(DB_PATH):
     conn.commit()
     conn.close()
 
-
-#By 24f3000209
 # Vector similarity calculation with improved handling
 def cosine_similarity(vec1, vec2):
     try:
