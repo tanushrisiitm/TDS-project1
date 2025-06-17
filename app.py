@@ -709,7 +709,7 @@ async def query_knowledge_base(
             "links": []
         }
 @app.post("/query")
- async def query_knowledge_base(request: QueryRequest):
+async def query_knowledge_base(request: QueryRequest):
      try:
          # Log the incoming request
          logger.info(f"Received query request: question='{request.question[:50]}...', image_provided={request.image is not None}")
