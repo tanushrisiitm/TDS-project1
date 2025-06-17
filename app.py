@@ -63,6 +63,8 @@ app.add_middleware(
 if not API_KEY:
     logger.error("API_KEY environment variable is not set. The application will not function correctly.")
 
+print("API key starts with:", os.getenv("OPENAI_API_KEY")[:8])  # Safe partial print
+
 # Create a connection to the SQLite database
 def get_db_connection():
     conn = None
