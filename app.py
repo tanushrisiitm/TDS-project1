@@ -33,7 +33,7 @@ SIMILARITY_THRESHOLD = 0.68  # Lowered threshold for better recall
 MAX_RESULTS = 10  # Increased to get more context
 load_dotenv()
 MAX_CONTEXT_CHUNKS = 4  # Increased number of chunks per source
-API_KEY = os.getenv("API_KEY")  # Get API key from environment variable
+API_KEY = os.getenv("OPEN_API_KEY")  # Get API key from environment variable
 
 # Models
 class QueryRequest(BaseModel):
@@ -154,7 +154,7 @@ async def get_embedding(text, max_retries=3):
             # Call the embedding API through aipipe proxy
             url = "https://aipipe.org/openai/v1/embeddings"
             headers = {
-                "Authorization": API_KEY,
+                "Authorization":  f"Bearer {API_KEY}",
                 "Content-Type": "application/json"
             }
             payload = {
