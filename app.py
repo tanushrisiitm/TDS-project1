@@ -62,7 +62,7 @@ app.add_middleware(
 
 # Verify API key is set
 if not API_KEY:
-    logger.error("API_KEY environment variable is not set. The application will not function correctly.
+    logger.error("API_KEY environment variable is not set. The application will not function correctly.")
                  
 # Create a connection to the SQLite database
 def get_db_connection():
