@@ -16,10 +16,15 @@ from fastapi.responses import JSONResponse
 import uvicorn
 import traceback
 from dotenv import load_dotenv
+from fastapi.templating import Jinja2Templates
+from fastapi.requests import Request
+from fastapi.responses import HTMLResponse
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+templates = Jinja2Templates(directory="templates")
 
 # Constants
 DB_PATH = "knowledge_base.db"
@@ -795,6 +800,11 @@ async def query_knowledge_base(request: QueryRequest):
              status_code=500,
              content={"error": error_msg}
          )
+
+@app.get("/", response_class=HTMLResponse)
+async def serve_index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
 
 # Health check endpoint
 @app.get("/health")
