@@ -1,5 +1,6 @@
 # app.py
 import os
+import openai
 import json
 import sqlite3
 import numpy as np
@@ -61,10 +62,8 @@ app.add_middleware(
 
 # Verify API key is set
 if not API_KEY:
-    logger.error("API_KEY environment variable is not set. The application will not function correctly.")
-
-print("API key starts with:", os.getenv("API_KEY")[:8])  # Safe partial print
-
+    logger.error("API_KEY environment variable is not set. The application will not function correctly.
+                 
 # Create a connection to the SQLite database
 def get_db_connection():
     conn = None
