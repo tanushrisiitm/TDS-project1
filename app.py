@@ -602,6 +602,7 @@ def parse_llm_response(response):
         }
 
 # Define API routes
+@app.post("/")
 @app.post("/api")
 async def query_knowledge_base(
     request: QueryRequest,
